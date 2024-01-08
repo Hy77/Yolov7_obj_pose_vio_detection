@@ -45,12 +45,12 @@ project = rf.workspace("east-west-uniersity").project("violance-nonviolance")
 dataset = project.version(5).download("yolov7")
 ```
 
-### Download Pretrained Models
-The project uses various pretrained models. Download them using the following links:
+### Download Models
+The project uses various models. Download them using the following links:
 
-- YOLOv7 Pretrained Model: [yolov7.pt](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7.pt)
+- YOLOv7 Object Model: [yolov7.pt](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7.pt)
 - YOLOv7 Pose Model: [yolov7-w6-pose.pt](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-w6-pose.pt)
-- YOLOv7 Violence Model:
+- YOLOv7 Violence Model: [yolov7_vio_detect_v3.pt]
 - For additional training: [yolov7_training.pt](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7_training.pt)
 
 ## Usage
