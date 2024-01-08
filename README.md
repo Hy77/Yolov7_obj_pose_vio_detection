@@ -50,9 +50,8 @@ The project uses various pretrained models. Download them using the following li
 
 - YOLOv7 Pretrained Model: [yolov7.pt](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7.pt)
 - YOLOv7 Pose Model: [yolov7-w6-pose.pt](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-w6-pose.pt)
+- YOLOv7 Violence Model:
 - For additional training: [yolov7_training.pt](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7_training.pt)
-
-Certainly, I can add specific examples to the "Usage" section of the README to illustrate how to run the scripts. Here's how it can be presented:
 
 ## Usage
 
