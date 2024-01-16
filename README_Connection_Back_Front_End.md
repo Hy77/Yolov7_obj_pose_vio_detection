@@ -67,7 +67,3 @@ React Hook (`useAiOutput`): Custom hook for accessing the detection output conte
 ### Integration of Detection Algorithm and Frontend
 
 The integration allows the frontend to display real-time detection results from the backend algorithm. The use of React Context and Hooks ensures a clean and efficient state management across the application. The Socket.IO integration facilitates seamless and immediate communication between the backend and frontend, enabling a dynamic and responsive user interface.
-
-## Conclusion
-
-This system architecture effectively combines a powerful detection algorithm with a modern React frontend, ensuring high performance and real-time data handling. The use of Flask and Socket.IO on the backend, along with React Context and Hooks on the frontend, creates a robust and scalable solution suitable for real-time detection applications.
