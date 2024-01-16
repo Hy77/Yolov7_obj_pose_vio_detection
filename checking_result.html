@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Violence Detection</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 1; padding: 20px; }
+        .form-group { margin-bottom: 20px; } /* augment interval */
+        #results #statusComplete { margin-top: 20px; margin-bottom: 20px;}
+        input[type="text"] {
+            width: 40%; /* 调整为所需的宽度 */
+            box-sizing: border-box; /* 确保 padding 和 border 不会影响宽度 */
+        }
+    </style>
+</head>
+<body>
+    <h1>:)</h1>
+    <form id="detectionForm">
+        <div class="form-group">
+            <label for="source">Please enter the source path:</label>
+            <input type="text" id="source" placeholder="Enter source path" value="inference/images/ufc_sc_1.png">
+        </div>
+        <div class="form-group">
+            <label for="cameraId">Camera ID:</label>
+            <input type="text" id="cameraId" placeholder="Enter Camera ID" value="4">
+        </div>
+        <div class="form-group">
+            <label for="other_street">Other Street:</label>
+            <input type="text" id="other_street" placeholder="Enter Other Street" value="1">
+        </div>
+        <button type="submit">Start Detect</button>
+        <button type="button" id="resetButton">Reset Map</button>
+    </form>
+    <div id="results">
+        <p id="statusStarted"></p>
+        <p id="statusCheckID"></p>
+        <p id="statusProgress"></p>
+        <p id="statusComplete"></p>
+    </div>
+
+    <!-- Import Socket.IO -->
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script type="text/javascript">
+        function clearMessages() {
+            document.getElementById('statusStarted').innerText = '';
+            document.getElementById('statusCheckID').innerText = '';
+            document.getElementById('statusProgress').innerText = '';
+            document.getElementById('statusComplete').innerText = '';
+        }
+
+        document.getElementById('detectionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            clearMessages();
+
+            var source = document.getElementById('source').value;
+            var cameraId = document.getElementById('cameraId').value;
+            var other_street = document.getElementById('other_street').value;
+
+            // protect
+            if (cameraId < 0 || cameraId > 4 || isNaN(cameraId)) {
+                alert("'Camera ID' must be between 0 and 4");
+                return;
+            }
+            if (other_street < 0 || other_street > 4 || isNaN(other_street)) {
+                alert("'Other Street' must be between 0 and 4");
+                return;
+            }
+
+            var url = `http://127.0.0.1:5000/run-detection?source=${encodeURIComponent(source)}&camera_id=${encodeURIComponent(cameraId)}&other_street=${encodeURIComponent(other_street)}`;
+
+            document.getElementById('statusStarted').innerText = 'Detection started at ' + new Date().toLocaleString();
+
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(err => { throw new Error(err.error); });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    var resultsElement = document.getElementById('results');
+                    document.getElementById('statusCheckID').innerText = 'Task_ID: ' + data.task_id;
+                })
+                .catch(error => {
+                    document.getElementById('statusComplete').innerText = error.message;
+                });
+
+            document.getElementById('statusProgress').innerText = 'Detection in progress...';
+
+        });
+
+        document.getElementById('resetButton').addEventListener('click', function() {
+            clearMessages();
+            var url = `http://127.0.0.1:5000/reset-map`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                })
+                .catch(error => {
+                    console.error('Error during reset:', error);
+                });
+        });
+
+
+        const socket = io.connect('http://localhost:5000');
+        socket.on('connect', function() {
+            console.log('Connected to SocketIO server');
+        });
+        socket.on('detection_complete', function(data) {
+            if (data.result.startsWith("ERROR")) {
+                document.getElementById('statusComplete').innerText = 'Error: ' + data.result;
+            } else {
+                document.getElementById('statusComplete').innerHTML = 'Detection Complete.<br><br>Result: ' + JSON.stringify(data.result);
+            }
+        });
+
+    </script>
+</body>
+</html>
