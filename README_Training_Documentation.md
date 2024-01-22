@@ -4,7 +4,7 @@
 This document outlines the training process of a specialized YOLOv7 model designed to detect violent behavior in various contexts. The model was trained using a dataset specifically curated for distinguishing between violent and non-violent behaviors.
 
 #### Dataset
-The dataset used for training was sourced from the [East-West University dataset on Roboflow](https://universe.roboflow.com/east-west-uniersity/violance-nonviolance), which consists of 6614 images divided into:
+The dataset used for training was sourced from the [East-West University dataset on Roboflow](https://universe.roboflow.com/east-west-uniersity/violance-nonviolance/dataset/5), which consists of 6614 images divided into:
 
 - **Training Set:** 5787 images
 - **Validation Set:** 551 images
