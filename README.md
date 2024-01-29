@@ -50,7 +50,7 @@ The project uses various models. Download them using the following links:
 
 - YOLOv7 Object Model: [yolov7.pt](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7.pt)
 - YOLOv7 Pose Model: [yolov7-w6-pose.pt](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-w6-pose.pt)
-- YOLOv7 Violence Model: [yolov7_vio_detect_v3.pt]
+- YOLOv7 Violence Model: [yolov7_vio_detect_v3.pt](https://github.com/Hy77/Yolov7_obj_pose_vio_detection/releases/download/vio_detect_model/yolov7_vio_detect_v3.pt)
 - For additional training: [yolov7_training.pt](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7_training.pt)
 
 ## Usage
